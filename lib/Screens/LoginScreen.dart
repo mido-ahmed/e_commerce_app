@@ -6,11 +6,10 @@ import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:flutter/material.dart';
 //import 'package:http/http.dart' as http;
 
-
 class LoginScreen extends StatelessWidget {
   final TextEditingController emailcontroller = TextEditingController();
   final TextEditingController passcontroller = TextEditingController();
-  final GlobalKey<FormState> _formKey =GlobalKey<FormState>();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,7 +29,7 @@ class LoginScreen extends StatelessWidget {
                   ),
                   CircleAvatar(
                     backgroundImage: AssetImage('assets/Images/logo2.png'),
-                      radius: 50,
+                    radius: 50,
                   ),
                   SizedBox(
                     height: 10,
@@ -53,12 +52,14 @@ class LoginScreen extends StatelessWidget {
                         TextFormField(
                           textInputAction: TextInputAction.go,
                           minLines: 1,
-                          validator: (value){
-                            if(value == null || value.isEmpty){
-                              return "Please Enter your Email" ;
-                            }else if(value.contains("@gmail.com") == false &&value.isNotEmpty){
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return "Please Enter your Email";
+                            } else if (value.contains("@gmail.com") == false &&
+                                value.isNotEmpty) {
                               return "No way Your email very weak or missing something";
-                            }else if(value.contains("@gmail.com") == true &&value.isNotEmpty){
+                            } else if (value.contains("@gmail.com") == true &&
+                                value.isNotEmpty) {
                               return null;
                             }
                           },
@@ -70,15 +71,17 @@ class LoginScreen extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(20),
                                   borderSide: BorderSide(color: Colors.grey))),
                         ),
-                        SizedBox(height: 20,),
+                        SizedBox(
+                          height: 20,
+                        ),
                         TextFormField(
                           textInputAction: TextInputAction.go,
-                          validator: (value){
-                            if(value == null || value.isEmpty){
-                              return "Please Enter your Password" ;
-                            }else if(value.length < 10){
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return "Please Enter your Password";
+                            } else if (value.length < 10) {
                               return "No way Your Password vary weak";
-                            }else{
+                            } else {
                               return null;
                             }
                           },
@@ -100,14 +103,18 @@ class LoginScreen extends StatelessWidget {
                   Container(
                       width: 375,
                       height: 45,
-                      decoration: BoxDecoration(borderRadius: BorderRadiusDirectional.circular(5)),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadiusDirectional.circular(5)),
                       child: ElevatedButton(
                           onPressed: () {
-                            if(!_formKey.currentState!.validate()){
-                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Your Info is Valid")));
+                            if (!_formKey.currentState!.validate()) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                      content: Text("Your Info is Valid")));
                               //toast package in net to search
                             }
-                            Navigator.of(context).pushNamed('/home' , arguments: 'hello');
+                            Navigator.of(context)
+                                .pushNamed('/home', arguments: 'hello');
                             print(emailcontroller.text);
                             print(passcontroller.text);
                           },
