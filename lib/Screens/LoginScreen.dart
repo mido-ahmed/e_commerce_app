@@ -104,7 +104,8 @@ class LoginScreen extends StatelessWidget {
                       child: ElevatedButton(
                           onPressed: () {
                             if(!_formKey.currentState!.validate()){
-                              return null;
+                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Your Info is Valid")));
+                              //toast package in net to search
                             }
                             Navigator.of(context).pushNamed('/home' , arguments: 'hello');
                             print(emailcontroller.text);
