@@ -4,6 +4,7 @@ import 'package:e_commerce_app/Screens/SignInScreens.dart';
 import 'package:e_commerce_app/themes/Colors.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:flutter/material.dart';
+import 'package:dio/dio.dart';
 //import 'package:http/http.dart' as http;
 
 class LoginScreen extends StatelessWidget {
@@ -12,6 +13,18 @@ class LoginScreen extends StatelessWidget {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
+    //postman function to post data and print response
+    void Signin() async {
+      final response =
+          await Dio().post('https://api.escuelajs.co/api/v1/users/', data: {
+        "name": "Nicolas",
+        "email": "nico@gmail.com",
+        "password": "123",
+        "avatar": "https://api.lorem.space/image/face?w=640&h=480"
+      });
+      print(response);
+    }
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: SafeArea(
@@ -111,8 +124,9 @@ class LoginScreen extends StatelessWidget {
                               ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
                                       content: Text("Your Info is Valid")));
-                              //toast package in net to search
                             }
+                            Signin();
+                            //toast package in net to search
                             Navigator.of(context)
                                 .pushNamed('/home', arguments: 'hello');
                             print(emailcontroller.text);
