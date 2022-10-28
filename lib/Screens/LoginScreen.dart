@@ -23,6 +23,7 @@ class LoginScreen extends StatelessWidget {
           "password": passcontroller.text,
           "avatar": "https://api.lorem.space/image/face?w=640&h=480"
         });
+        print(response);
       } on DioError catch (e) {
         print("This is an error :${e.response}");
         if (e.response!.statusCode == 400) {
