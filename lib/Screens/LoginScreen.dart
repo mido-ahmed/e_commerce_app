@@ -23,6 +23,7 @@ class LoginScreen extends StatelessWidget {
           "password": passcontroller.text,
           "avatar": "https://api.lorem.space/image/face?w=640&h=480"
         });
+        Navigator.of(context).pushNamed('/home', arguments: 'hello');
         print(response);
       } on DioError catch (e) {
         print("This is an error :${e.response}");
@@ -133,8 +134,6 @@ class LoginScreen extends StatelessWidget {
                             if (_formKey.currentState!.validate()) {
                               Signin();
                               //toast package in net to search
-                              Navigator.of(context)
-                                  .pushNamed('/home', arguments: 'hello');
                               print(emailcontroller.text);
                               print(passcontroller.text);
                             }
