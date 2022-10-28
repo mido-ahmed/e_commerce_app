@@ -56,9 +56,9 @@ class LoginScreen extends StatelessWidget {
                           validator: (value){
                             if(value == null || value.isEmpty){
                               return "Please Enter your Email" ;
-                            }else if(value.length<9 &&value.isNotEmpty){
-                              return "No way Your email very weak";
-                            }else{
+                            }else if(value.contains("@gmail.com") == false &&value.isNotEmpty){
+                              return "No way Your email very weak or missing something";
+                            }else if(value.contains("@gmail.com") == true &&value.isNotEmpty){
                               return null;
                             }
                           },
