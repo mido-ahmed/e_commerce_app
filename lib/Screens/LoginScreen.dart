@@ -15,14 +15,23 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     //postman function to post data and print response
     void Signin() async {
-      final response =
-          await Dio().post('https://api.escuelajs.co/api/v1/users/', data: {
-        "name": "Nicolas",
-        "email": emailcontroller.text,
-        "password": passcontroller.text,
-        "avatar": "https://api.lorem.space/image/face?w=640&h=480"
-      });
-      print(response);
+      try {
+        final response =
+            await Dio().post('https://api.escuelajs.co/api/v1/users/', data: {
+          "name": "Nicolas",
+          "email": emailcontroller.text,
+          "password": passcontroller.text,
+          "avatar": "https://api.lorem.space/image/face?w=640&h=480"
+        });
+      } on DioError catch (e) {
+        print("This is an error :${e.response}");
+        if (e.response!.statusCode == 400) {
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            content: Text("Your Should Enter Valid Email and Password"),
+            backgroundColor: Colors.redAccent,
+          ));
+        }
+      }
     }
 
     return Scaffold(
@@ -120,17 +129,14 @@ class LoginScreen extends StatelessWidget {
                           borderRadius: BorderRadiusDirectional.circular(5)),
                       child: ElevatedButton(
                           onPressed: () {
-                            if (!_formKey.currentState!.validate()) {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                      content: Text("Your Info is Valid")));
+                            if (_formKey.currentState!.validate()) {
+                              Signin();
+                              //toast package in net to search
+                              Navigator.of(context)
+                                  .pushNamed('/home', arguments: 'hello');
+                              print(emailcontroller.text);
+                              print(passcontroller.text);
                             }
-                            Signin();
-                            //toast package in net to search
-                            Navigator.of(context)
-                                .pushNamed('/home', arguments: 'hello');
-                            print(emailcontroller.text);
-                            print(passcontroller.text);
                           },
                           child: Text("Sign in"))),
                   SizedBox(
