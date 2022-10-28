@@ -18,8 +18,8 @@ class LoginScreen extends StatelessWidget {
       final response =
           await Dio().post('https://api.escuelajs.co/api/v1/users/', data: {
         "name": "Nicolas",
-        "email": "nico@gmail.com",
-        "password": "123",
+        "email": emailcontroller.text,
+        "password": passcontroller.text,
         "avatar": "https://api.lorem.space/image/face?w=640&h=480"
       });
       print(response);
