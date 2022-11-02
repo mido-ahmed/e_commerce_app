@@ -16,7 +16,7 @@ class SigninScreen extends StatelessWidget {
     void Signin() async {
       try {
         final response =
-        await Dio().post('https://api.escuelajs.co/api/v1/users/', data: {
+            await Dio().post('https://api.escuelajs.co/api/v1/users/', data: {
           "name": fullnameController.text,
           "email": mailController.text,
           "password": passController.text,
@@ -34,6 +34,7 @@ class SigninScreen extends StatelessWidget {
         }
       }
     }
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: SafeArea(
@@ -98,10 +99,11 @@ class SigninScreen extends StatelessWidget {
                           validator: (value) {
                             if (value == null || value.isEmpty) {
                               return "Please Enter your Name";
-                            } else if (value.contains("@gmail.com") == false &&value.isNotEmpty) {
+                            } else if (value.contains("@gmail.com") == false &&
+                                value.isNotEmpty) {
                               return ("Missing '@gmail.com'");
-                            }else{
-                              return null ;
+                            } else {
+                              return null;
                             }
                           },
                           controller: mailController,
@@ -121,7 +123,7 @@ class SigninScreen extends StatelessWidget {
                           validator: (value) {
                             if (value == null || value.isEmpty) {
                               return "Please Enter your Password";
-                            } else if (value.length < 10 ) {
+                            } else if (value.length < 10) {
                               return "No way Your Password vary weak";
                             } else {
                               return null;
@@ -144,7 +146,7 @@ class SigninScreen extends StatelessWidget {
                           validator: (value) {
                             if (value == null || value.isEmpty) {
                               return "Please Enter your Password";
-                            } else if (value.length < 10 ) {
+                            } else if (value.length < 10) {
                               return "No way Your Password vary weak";
                             } else {
                               return null;
