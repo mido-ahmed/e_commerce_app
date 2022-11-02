@@ -1,15 +1,39 @@
 import 'package:e_commerce_app/Screens/HomeScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
+import 'package:dio/dio.dart';
+import 'package:http/http.dart' as http;
 
 class SigninScreen extends StatelessWidget {
- final fullnameController = TextEditingController();
- final mailController = TextEditingController();
- final passController = TextEditingController();
- final GlobalKey<FormState> _formKey =GlobalKey<FormState>();
+  final fullnameController = TextEditingController();
+  final mailController = TextEditingController();
+  final passController = TextEditingController();
+  final passControllertwo = TextEditingController();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
- @override
+  @override
   Widget build(BuildContext context) {
+    void Signin() async {
+      try {
+        final response =
+        await Dio().post('https://api.escuelajs.co/api/v1/users/', data: {
+          "name": fullnameController.text,
+          "email": mailController.text,
+          "password": passController.text,
+          "avatar": "https://api.lorem.space/image/face?w=640&h=480"
+        });
+        Navigator.of(context).pushNamed('/home', arguments: 'hello');
+        print(response);
+      } on DioError catch (e) {
+        print("This is an error :${e.response}");
+        if (e.response!.statusCode == 400) {
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            content: Text("Your Should Enter Valid Name Or Email Or Password"),
+            backgroundColor: Colors.redAccent,
+          ));
+        }
+      }
+    }
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: SafeArea(
@@ -23,7 +47,7 @@ class SigninScreen extends StatelessWidget {
                     height: 35,
                   ),
                   CircleAvatar(
-                      radius: 75,
+                    radius: 75,
                     backgroundImage: AssetImage('assets/Images/logo2.png'),
                   ),
                   SizedBox(
@@ -47,30 +71,92 @@ class SigninScreen extends StatelessWidget {
                     key: _formKey,
                     child: Column(
                       children: [
-                        textField(
-                          Text: 'Full Name',
-                          controller: TextEditingController(),
+                        TextFormField(
+                          textInputAction: TextInputAction.go,
+                          minLines: 1,
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return "Please Enter your Name";
+                            } else if (value.isNotEmpty) {
+                              return null;
+                            }
+                          },
+                          controller: fullnameController,
+                          decoration: InputDecoration(
+                              hintText: "Your Name",
+                              prefixIcon: Icon(Icons.person_outline_outlined),
+                              enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(20),
+                                  borderSide: BorderSide(color: Colors.grey))),
                         ),
                         SizedBox(
                           height: 10,
                         ),
-                        textField(
-                          Text: 'Your Mail',
-                          controller: TextEditingController(),
+                        TextFormField(
+                          textInputAction: TextInputAction.go,
+                          minLines: 1,
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return "Please Enter your Name";
+                            } else if (value.contains("@gmail.com") == false &&value.isNotEmpty) {
+                              return ("Missing '@gmail.com'");
+                            }else{
+                              return null ;
+                            }
+                          },
+                          controller: mailController,
+                          decoration: InputDecoration(
+                              hintText: "Your Mail",
+                              prefixIcon: Icon(Icons.mail_outline_outlined),
+                              enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(20),
+                                  borderSide: BorderSide(color: Colors.grey))),
                         ),
                         SizedBox(
                           height: 10,
                         ),
-                        textField(
-                          Text: 'Your Password',
-                          controller: TextEditingController(),
+                        TextFormField(
+                          textInputAction: TextInputAction.go,
+                          minLines: 1,
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return "Please Enter your Password";
+                            } else if (value.length < 10 ) {
+                              return "No way Your Password vary weak";
+                            } else {
+                              return null;
+                            }
+                          },
+                          controller: passController,
+                          decoration: InputDecoration(
+                              hintText: "Your Password",
+                              prefixIcon: Icon(Icons.lock),
+                              enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(20),
+                                  borderSide: BorderSide(color: Colors.grey))),
                         ),
                         SizedBox(
                           height: 10,
                         ),
-                        textField(
-                          Text: 'Password Again',
-                          controller: TextEditingController(),
+                        TextFormField(
+                          textInputAction: TextInputAction.go,
+                          minLines: 1,
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return "Please Enter your Password";
+                            } else if (value.length < 10 ) {
+                              return "No way Your Password vary weak";
+                            } else {
+                              return null;
+                            }
+                          },
+                          controller: passControllertwo,
+                          decoration: InputDecoration(
+                              hintText: "Your Password",
+                              prefixIcon: Icon(Icons.lock),
+                              enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(20),
+                                  borderSide: BorderSide(color: Colors.grey))),
                         ),
                       ],
                     ),
@@ -83,19 +169,13 @@ class SigninScreen extends StatelessWidget {
                       height: 45,
                       child: ElevatedButton(
                           onPressed: () {
-                            if(!_formKey.currentState!.validate()){
-                              return ;
+                            if (!_formKey.currentState!.validate()) {
+                              Signin();
+                              print(fullnameController.text);
+                              print(mailController.text);
+                              print(passController.text);
                             }
-                            Navigator.of(context).pushReplacement(
-                                MaterialPageRoute(
-                                    builder: (BuildContext context) {
-                              return HomeScreen();
-                            }));
-                            print(fullnameController.text);
-                            print(mailController.text);
-                            print(passController.text);
                           },
-
                           child: Text("Sign in"))),
                   Divider(height: 2),
                   SizedBox(
@@ -136,35 +216,6 @@ class SigninScreen extends StatelessWidget {
           ),
         ),
       ),
-    );
-  }
-}
-
-class textField extends StatelessWidget {
-  const textField({
-    Key? key,
-    required this.Text, required this.controller,
-  }) : super(key: key);
-  final String Text;
-  final TextEditingController controller ;
-  @override
-  Widget build(BuildContext context) {
-    return TextFormField(
-      validator: (value){
-        if(value!.isNotEmpty && value.length>9){
-          return null ;
-        }else if(value.length<9&&value.isNotEmpty){
-          return "Short Input";
-        }else{
-          return "Please Enter your Info";
-        }
-      },
-      decoration: InputDecoration(
-          hintText: Text,
-          prefixIcon: Icon(Icons.person),
-          enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(20),
-              borderSide: BorderSide(color: Colors.white))),
     );
   }
 }
