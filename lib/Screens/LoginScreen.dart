@@ -5,6 +5,7 @@ import 'package:e_commerce_app/themes/Colors.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
 class LoginScreen extends StatelessWidget {
@@ -21,6 +22,12 @@ class LoginScreen extends StatelessWidget {
           "email": emailcontroller.text,
           "password": passcontroller.text
         });
+        final accesstoken = response.data['access_token'];
+        final prefs = await SharedPreferences.getInstance();
+        await prefs.setString('access_token', accesstoken);
+        final access = await prefs.get('access_token');
+        print("My access token is $access");
+
         Navigator.of(context).pushNamed('/home', arguments: 'hello');
         print(response);
       } on DioError catch (e) {
