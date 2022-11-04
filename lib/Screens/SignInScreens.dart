@@ -120,6 +120,7 @@ class SigninScreen extends StatelessWidget {
                         ),
                         TextFormField(
                           textInputAction: TextInputAction.next,
+                          obscureText: true,
                           minLines: 1,
                           validator: (value) {
                             if (value == null || value.isEmpty) {
@@ -152,6 +153,7 @@ class SigninScreen extends StatelessWidget {
                             return null;
                           },
                           controller: passControllertwo,
+                          obscureText: true,
                           decoration: InputDecoration(
                               hintText: "Your Password Again",
                               prefixIcon: Icon(Icons.lock),
