@@ -31,6 +31,7 @@ class LoginScreen extends StatelessWidget {
         Navigator.of(context).pushNamed('/home', arguments: 'hello');
         print(response);
       } on DioError catch (e) {
+
         print("This is an error :${e.response}");
         if (e.response!.statusCode == 400) {
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
