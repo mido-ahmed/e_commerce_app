@@ -14,10 +14,10 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //postman function to post data and print response
-    void Signin() async {
+    void login() async {
       try {
-        final response =
-            await Dio().post('https://api.escuelajs.co/api/v1/auth/login', data: {
+        final response = await Dio()
+            .post('https://api.escuelajs.co/api/v1/auth/login', data: {
           "email": emailcontroller.text,
           "password": passcontroller.text
         });
@@ -72,7 +72,7 @@ class LoginScreen extends StatelessWidget {
                     child: Column(
                       children: [
                         TextFormField(
-                          textInputAction: TextInputAction.go,
+                          textInputAction: TextInputAction.next,
                           minLines: 1,
                           validator: (value) {
                             if (value == null || value.isEmpty) {
@@ -97,7 +97,7 @@ class LoginScreen extends StatelessWidget {
                           height: 20,
                         ),
                         TextFormField(
-                          textInputAction: TextInputAction.go,
+                          textInputAction: TextInputAction.next,
                           validator: (value) {
                             if (value == null || value.isEmpty) {
                               return "Please Enter your Password";
@@ -130,7 +130,7 @@ class LoginScreen extends StatelessWidget {
                       child: ElevatedButton(
                           onPressed: () {
                             if (_formKey.currentState!.validate()) {
-                              Signin();
+                              login();
                               //toast package in net to search
                               print(emailcontroller.text);
                               print(passcontroller.text);

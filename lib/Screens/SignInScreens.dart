@@ -1,4 +1,5 @@
 import 'package:e_commerce_app/Screens/HomeScreen.dart';
+import 'package:e_commerce_app/Screens/LoginScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:dio/dio.dart';
@@ -22,7 +23,10 @@ class SigninScreen extends StatelessWidget {
           "password": passController.text,
           "avatar": "https://api.lorem.space/image/face?w=640&h=480"
         });
-        Navigator.of(context).pushNamed('/home', arguments: 'hello');
+        Navigator.of(context)
+            .push(MaterialPageRoute(builder: (BuildContext context) {
+          return LoginScreen();
+        }));
         print(response);
       } on DioError catch (e) {
         print("This is an error :${e.response}");
@@ -72,7 +76,7 @@ class SigninScreen extends StatelessWidget {
                     child: Column(
                       children: [
                         TextFormField(
-                          textInputAction: TextInputAction.go,
+                          textInputAction: TextInputAction.next,
                           minLines: 1,
                           validator: (value) {
                             if (value == null || value.isEmpty) {
@@ -92,7 +96,7 @@ class SigninScreen extends StatelessWidget {
                           height: 10,
                         ),
                         TextFormField(
-                          textInputAction: TextInputAction.go,
+                          textInputAction: TextInputAction.next,
                           minLines: 1,
                           validator: (value) {
                             if (value == null || value.isEmpty) {
@@ -115,7 +119,7 @@ class SigninScreen extends StatelessWidget {
                           height: 10,
                         ),
                         TextFormField(
-                          textInputAction: TextInputAction.go,
+                          textInputAction: TextInputAction.next,
                           minLines: 1,
                           validator: (value) {
                             if (value == null || value.isEmpty) {
@@ -137,7 +141,7 @@ class SigninScreen extends StatelessWidget {
                           height: 10,
                         ),
                         TextFormField(
-                          textInputAction: TextInputAction.go,
+                          textInputAction: TextInputAction.next,
                           minLines: 1,
                           validator: (value) {
                             if (value == null || value.isEmpty) {
@@ -167,10 +171,21 @@ class SigninScreen extends StatelessWidget {
                       child: ElevatedButton(
                           onPressed: () {
                             if (_formKey.currentState!.validate()) {
-                              Signin();
+                              if (passController.text ==
+                                  passControllertwo.text) {
+                                Signin();
+                              } else {
+                                ScaffoldMessenger.of(context)
+                                    .showSnackBar(SnackBar(
+                                  content: Text(
+                                      "You Should Enter Two Passwords Equal"),
+                                  backgroundColor: Colors.redAccent,
+                                ));
+                              }
                               print(fullnameController.text);
                               print(mailController.text);
                               print(passController.text);
+                              print(passControllertwo.text);
                             }
                           },
                           child: Text("Sign in"))),
