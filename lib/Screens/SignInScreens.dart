@@ -154,7 +154,7 @@ class SigninScreen extends StatelessWidget {
                           },
                           controller: passControllertwo,
                           decoration: InputDecoration(
-                              hintText: "Your Password",
+                              hintText: "Your Password Again",
                               prefixIcon: Icon(Icons.lock),
                               enabledBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(20),
