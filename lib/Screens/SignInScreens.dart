@@ -36,7 +36,6 @@ class SigninScreen extends StatelessWidget {
     }
 
     return Scaffold(
-      resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
@@ -78,9 +77,8 @@ class SigninScreen extends StatelessWidget {
                           validator: (value) {
                             if (value == null || value.isEmpty) {
                               return "Please Enter your Name";
-                            } else if (value.isNotEmpty) {
-                              return null;
                             }
+                            return null;
                           },
                           controller: fullnameController,
                           decoration: InputDecoration(
@@ -102,9 +100,8 @@ class SigninScreen extends StatelessWidget {
                             } else if (value.contains("@gmail.com") == false &&
                                 value.isNotEmpty) {
                               return ("Missing '@gmail.com'");
-                            } else {
-                              return null;
                             }
+                            return null;
                           },
                           controller: mailController,
                           decoration: InputDecoration(
@@ -125,9 +122,8 @@ class SigninScreen extends StatelessWidget {
                               return "Please Enter your Password";
                             } else if (value.length < 10) {
                               return "No way Your Password vary weak";
-                            } else {
-                              return null;
                             }
+                            return null;
                           },
                           controller: passController,
                           decoration: InputDecoration(
@@ -148,9 +144,8 @@ class SigninScreen extends StatelessWidget {
                               return "Please Enter your Password";
                             } else if (value.length < 10) {
                               return "No way Your Password vary weak";
-                            } else {
-                              return null;
                             }
+                            return null;
                           },
                           controller: passControllertwo,
                           decoration: InputDecoration(
@@ -171,7 +166,7 @@ class SigninScreen extends StatelessWidget {
                       height: 45,
                       child: ElevatedButton(
                           onPressed: () {
-                            if (!_formKey.currentState!.validate()) {
+                            if (_formKey.currentState!.validate()) {
                               Signin();
                               print(fullnameController.text);
                               print(mailController.text);
