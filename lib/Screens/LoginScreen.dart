@@ -17,11 +17,9 @@ class LoginScreen extends StatelessWidget {
     void Signin() async {
       try {
         final response =
-            await Dio().post('https://api.escuelajs.co/api/v1/users/', data: {
-          "name": "Nicolas",
+            await Dio().post('https://api.escuelajs.co/api/v1/auth/login', data: {
           "email": emailcontroller.text,
-          "password": passcontroller.text,
-          "avatar": "https://api.lorem.space/image/face?w=640&h=480"
+          "password": passcontroller.text
         });
         Navigator.of(context).pushNamed('/home', arguments: 'hello');
         print(response);
