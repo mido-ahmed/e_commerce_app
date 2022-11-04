@@ -48,7 +48,7 @@ class SigninScreen extends StatelessWidget {
                     height: 35,
                   ),
                   CircleAvatar(
-                    radius: 75,
+                    radius: 65,
                     backgroundImage: AssetImage('assets/Images/logo2.png'),
                   ),
                   SizedBox(
