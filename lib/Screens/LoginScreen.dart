@@ -36,6 +36,7 @@ class LoginScreen extends StatelessWidget {
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             content: Text("Your Should Enter Valid Email and Password"),
             backgroundColor: Colors.redAccent,
+
           ));
         }
       }
