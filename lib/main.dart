@@ -28,3 +28,9 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+/*
+* Sql
+* 1-sqflite
+* 2-shared preference--> key : value
+* 3-Hive
+* */
