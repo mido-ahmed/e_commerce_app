@@ -1,13 +1,20 @@
 import 'package:e_commerce_app/Screens/HomeScreen.dart';
+import 'package:e_commerce_app/Screens/LoginScreen.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 
-class SplashScreen extends StatelessWidget {
+class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
 
   @override
+  State<SplashScreen> createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends State<SplashScreen> {
+  @override
   Widget build(BuildContext context) {
-    Timer(Duration(seconds: 5), () {
+    Timer(Duration(seconds: 3), () {
+      print(DateTime.now());
       Navigator.push(context, MaterialPageRoute(builder: (_) => HomeScreen()));
     });
     return Scaffold(
