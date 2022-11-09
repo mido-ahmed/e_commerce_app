@@ -1,4 +1,5 @@
 import 'package:e_commerce_app/Screens/ItemsScreen.dart';
+import 'package:e_commerce_app/Screens/SplashScreen.dart';
 import 'package:e_commerce_app/Screens/route_generator.dart';
 import 'package:flutter/material.dart';
 import 'Screens/CarsoulSlider.dart';
@@ -24,7 +25,7 @@ class MyApp extends StatelessWidget {
       onGenerateRoute: RouteGenerator.generateRoute,
       //darkTheme: ThemeData.dark(),
       debugShowCheckedModeBanner: false,
-      home: LoginScreen(),
+      home: SplashScreen(),
     );
   }
 }
