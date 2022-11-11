@@ -1,7 +1,4 @@
-import 'package:e_commerce_app/Screens/HomeScreen.dart';
-import 'package:e_commerce_app/Screens/Navigation.dart';
 import 'package:e_commerce_app/Screens/SignInScreens.dart';
-import 'package:e_commerce_app/themes/Colors.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';

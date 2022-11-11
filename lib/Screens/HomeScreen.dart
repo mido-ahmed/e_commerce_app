@@ -1,13 +1,8 @@
 import 'package:e_commerce_app/Screens/ItemsScreen.dart';
-import 'package:e_commerce_app/Screens/LoginScreen.dart';
 import 'package:e_commerce_app/themes/Colors.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import 'flashsaleScreen.dart';
-// import 'package:icon/icon.dart';
-// import 'package:icon_forest/icon_forest.dart';
-// import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 //flex widgets => Row and Columns widget
 class HomeScreen extends StatefulWidget {
