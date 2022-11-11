@@ -23,10 +23,7 @@ class SigninScreen extends StatelessWidget {
           "password": passController.text,
           "avatar": "https://api.lorem.space/image/face?w=640&h=480"
         });
-        Navigator.of(context)
-            .push(MaterialPageRoute(builder: (BuildContext context) {
-          return LoginScreen();
-        }));
+        Navigator.of(context).pushNamed('/Login');
         print(response);
       } on DioError catch (e) {
         print("This is an error :${e.response}");

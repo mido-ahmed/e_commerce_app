@@ -28,7 +28,7 @@ class LoginScreen extends StatelessWidget {
         final access = await prefs.get('access_token');
         print("My access token is $access");
 
-        Navigator.of(context).pushNamed('/home', arguments: 'hello');
+        Navigator.of(context).pushNamed('/home');
         print(response);
       } on DioError catch (e) {
         print("This is an error :${e.response}");

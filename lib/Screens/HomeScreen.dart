@@ -180,10 +180,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         Text("Flash Sale"),
                         TextButton(
                             onPressed: () {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (BuildContext context) {
-                                return FlashSale_Sceen();
-                              }));
+                              Navigator.of(context).pushNamed('/flash_sale');
                             },
                             child: Text("See More")),
                       ],
