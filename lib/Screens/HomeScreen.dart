@@ -1,4 +1,6 @@
+import 'package:e_commerce_app/Repository/category_repo.dart';
 import 'package:e_commerce_app/Screens/ItemsScreen.dart';
+import 'package:e_commerce_app/model/category_repo_model.dart';
 import 'package:e_commerce_app/themes/Colors.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -13,8 +15,18 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int activeIndex = 0;
   int currentIndex = 0;
-  final Screens=[
 
+  final List<circle_avatar_components> secondListOfCategories = [
+    circle_avatar_components(
+        urlImage: 'assets/Images/Group2.png', text: 'Man Shirt'),
+    circle_avatar_components(
+        urlImage: 'assets/Images/Group.png', text: 'Dress'),
+    circle_avatar_components(
+        urlImage: 'assets/Images/Group3.png', text: 'man Equipment'),
+    circle_avatar_components(
+        urlImage: 'assets/Images/Group5.png', text: 'Woman Bag'),
+    circle_avatar_components(
+        urlImage: 'assets/Images/Group4.png', text: 'Man Shoes'),
   ];
   final List urlImages = [
     'https://5.imimg.com/data5/YC/GV/XN/ANDROID-83761084/product-jpeg-500x500.jpg',
@@ -132,232 +144,268 @@ class _HomeScreenState extends State<HomeScreen> {
                 padding: const EdgeInsets.all(8.0),
                 child: SingleChildScrollView(
                     child: Column(children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text("Category"),
-                        TextButton(
-                            onPressed: () {}, child: Text("More Category")),
-                      ],
-                    ),
-                      SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: Row(
-                        children: [
-                          circle_avatar_components(
-                              urlImage: 'assets/Images/Group2.png',
-                              text: 'Man Shirt'),
-                          SizedBox(width: 10),
-                          circle_avatar_components(
-                              urlImage: 'assets/Images/Group.png', text: 'Dress'),
-                          SizedBox(width: 10),
-                          circle_avatar_components(
-                              urlImage: 'assets/Images/Group3.png',
-                              text: 'man Equipment'),
-                          SizedBox(width: 10),
-                          circle_avatar_components(
-                              urlImage: 'assets/Images/Group5.png',
-                              text: 'Woman Bag'),
-                          SizedBox(width: 10),
-                          circle_avatar_components(
-                              urlImage: 'assets/Images/Group4.png',
-                              text: 'Man Shoes'),
-                          SizedBox(width: 10),
-                        ],
-                      ),
-                    ),
-                    // SizedBox(
-                    //   height: 9,
-                    // ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text("Flash Sale"),
-                        TextButton(
-                            onPressed: () {
-                              Navigator.of(context).pushNamed('/flash_sale');
-                            },
-                            child: Text("See More")),
-                      ],
-                    ),
-                      SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: Row(
-                        children: [
-                          card_components(
-                              urlImage:
-                                  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqfRq03XIpz7IJfj19gk3YMtIC7AC3_lIvzA&usqp=CAU',
-                              new_price: '299,43',
-                              old_price: '543,33',
-                              product_text: 'FS - Nike Air Max 270 React',
-                              sale: '24% off'),
-                          card_components(
-                              urlImage:
-                                  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTk-1s8nlM2QBF1yQOvWIPxMGOsSSwcICrIQw&usqp=CAU',
-                              new_price: '299,43',
-                              old_price: '543,33',
-                              product_text: 'FS - QUILTED MAXI CROS',
-                              sale: '24% off'),
-                          card_components(
-                              urlImage:
-                                  'https://m.media-amazon.com/images/I/71eTPIjcR7L._AC_SY575_.jpg',
-                              new_price: '2429,00',
-                              old_price: '2800,00',
-                              product_text:
-                                  'Asics Gel-Quantum 90 Road Running Shoes for Men, White (White), 42 EU',
-                              sale: '24% off'),
-                        ],
-                      ),
-                    ),
-                      Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text("Mega Sale"),
-                        TextButton(onPressed: () {}, child: Text("See More")),
-                      ],
-                    ),
-                      SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: Row(
-                        children: [
-                          card_components(
-                              urlImage:
-                                  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqfRq03XIpz7IJfj19gk3YMtIC7AC3_lIvzA&usqp=CAU',
-                              new_price: '299,43',
-                              old_price: '543,33',
-                              product_text: 'FS - Nike Air Max 270 React',
-                              sale: '24% off'),
-                          card_components(
-                              urlImage:
-                                  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTk-1s8nlM2QBF1yQOvWIPxMGOsSSwcICrIQw&usqp=CAU',
-                              new_price: '299,43',
-                              old_price: '543,33',
-                              product_text: 'FS - QUILTED MAXI CROS',
-                              sale: '24% off'),
-                          card_components(
-                              urlImage:
-                                  'https://m.media-amazon.com/images/I/71eTPIjcR7L._AC_SY575_.jpg',
-                              new_price: '2429,00',
-                              old_price: '2800,00',
-                              product_text:
-                                  'Asics Gel-Quantum 90 Road Running Shoes for Men, White (White), 42 EU',
-                              sale: '24% off'),
-                        ],
-                      ),
-                    ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text("Category"),
+                      TextButton(
+                          onPressed: () {}, child: Text("More Category")),
+                    ],
+                  ),
+                  FutureBuilder<List<CategoryRepoModel>>(
+                    future: CategoryRepository().getAllCategories(),
+                    builder: (BuildContext context,
+                        AsyncSnapshot<List<CategoryRepoModel>> snapshot) {
+                      // my data in snapshot
+                      final ListOfCategories = snapshot.data;
 
-                      Stack(
-                      children: [
-                        Image.asset('assets/Images/coverShoes.png'),
-                        Padding(
-                          padding: const EdgeInsets.only(
-                              top: 50, bottom: 50, right: 50),
-                          child: ListTile(
-                            title: Text("Recomended Product",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 25,
-                                    color: AppColors.whiteColor)),
-                            subtitle: Text(
-                              "We Recommend the best for you",
-                              style: TextStyle(color: AppColors.whiteColor),
-                            ),
-                            autofocus: true,
-                            selected: true,
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return CircularProgressIndicator();
+                      }
+                      if (snapshot.data!.isEmpty) {
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          content: Text("List is Empty!"),
+                          backgroundColor: Colors.redAccent,
+                        ));
+                      }
+                      if (snapshot.connectionState == ConnectionState.none) {
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          content: Text("Connection Error!"),
+                          backgroundColor: Colors.redAccent,
+                        ));
+                      }
+                      if (snapshot.connectionState == ConnectionState.done) {
+                        return Container(
+                          height: 100,
+                          child: ListView.builder(
+                            itemCount: ListOfCategories!.length,
+                            shrinkWrap: true,
+                            scrollDirection: Axis.horizontal,
+                            itemBuilder: (context, index) {
+                              return Container(
+                                height: 100,
+                                margin: EdgeInsets.symmetric(horizontal: 12),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    CircleAvatar(
+                                      backgroundColor: AppColors.cyanColor,
+                                      radius: 36,
+                                      child: CircleAvatar(
+                                        backgroundColor: AppColors.whiteColor,
+                                        radius: 35,
+                                        child: Container(
+                                            child: Image.network(
+                                          ListOfCategories[index].image,
+                                          height: 55,
+                                          width: 55,
+                                        )),
+                                      ),
+                                    ),
+                                    Text(
+                                      ListOfCategories[index].name,
+                                      style:
+                                          TextStyle(color: Color(0xff9098B1)),
+                                    ),
+                                  ],
+                                ),
+                              );
+                            },
                           ),
+                        );
+                      }
+                      return Container(
+                        child: Text("Error,Try Again!"),
+                      );
+                    },
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text("Flash Sale"),
+                      TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pushNamed('/flash_sale');
+                          },
+                          child: Text("See More")),
+                    ],
+                  ),
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: [
+                        card_components(
+                            urlImage:
+                                'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqfRq03XIpz7IJfj19gk3YMtIC7AC3_lIvzA&usqp=CAU',
+                            new_price: '299,43',
+                            old_price: '543,33',
+                            product_text: 'FS - Nike Air Max 270 React',
+                            sale: '24% off'),
+                        card_components(
+                            urlImage:
+                                'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTk-1s8nlM2QBF1yQOvWIPxMGOsSSwcICrIQw&usqp=CAU',
+                            new_price: '299,43',
+                            old_price: '543,33',
+                            product_text: 'FS - QUILTED MAXI CROS',
+                            sale: '24% off'),
+                        card_components(
+                            urlImage:
+                                'https://m.media-amazon.com/images/I/71eTPIjcR7L._AC_SY575_.jpg',
+                            new_price: '2429,00',
+                            old_price: '2800,00',
+                            product_text:
+                                'Asics Gel-Quantum 90 Road Running Shoes for Men, White (White), 42 EU',
+                            sale: '24% off'),
+                      ],
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text("Mega Sale"),
+                      TextButton(onPressed: () {}, child: Text("See More")),
+                    ],
+                  ),
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: [
+                        card_components(
+                            urlImage:
+                                'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqfRq03XIpz7IJfj19gk3YMtIC7AC3_lIvzA&usqp=CAU',
+                            new_price: '299,43',
+                            old_price: '543,33',
+                            product_text: 'FS - Nike Air Max 270 React',
+                            sale: '24% off'),
+                        card_components(
+                            urlImage:
+                                'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTk-1s8nlM2QBF1yQOvWIPxMGOsSSwcICrIQw&usqp=CAU',
+                            new_price: '299,43',
+                            old_price: '543,33',
+                            product_text: 'FS - QUILTED MAXI CROS',
+                            sale: '24% off'),
+                        card_components(
+                            urlImage:
+                                'https://m.media-amazon.com/images/I/71eTPIjcR7L._AC_SY575_.jpg',
+                            new_price: '2429,00',
+                            old_price: '2800,00',
+                            product_text:
+                                'Asics Gel-Quantum 90 Road Running Shoes for Men, White (White), 42 EU',
+                            sale: '24% off'),
+                      ],
+                    ),
+                  ),
+                  Stack(
+                    children: [
+                      Image.asset('assets/Images/coverShoes.png'),
+                      Padding(
+                        padding: const EdgeInsets.only(
+                            top: 50, bottom: 50, right: 50),
+                        child: ListTile(
+                          title: Text("Recomended Product",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 25,
+                                  color: AppColors.whiteColor)),
+                          subtitle: Text(
+                            "We Recommend the best for you",
+                            style: TextStyle(color: AppColors.whiteColor),
+                          ),
+                          autofocus: true,
+                          selected: true,
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 2,
+                  ),
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: [
+                        grid_container_components(
+                          urlImage:
+                              'https://m.media-amazon.com/images/I/71eTPIjcR7L._AC_SY575_.jpg',
+                          product_text:
+                              'Asics Gel-Quantum 90 Road Running Shoes for Men, White (White), 42 EU',
+                          old_price: '2800,00',
+                          new_price: '2429,00',
+                          sale: '24',
+                        ),
+                        grid_container_components(
+                          urlImage:
+                              'https://m.media-amazon.com/images/I/71eTPIjcR7L._AC_SY575_.jpg',
+                          product_text:
+                              'Asics Gel-Quantum 90 Road Running Shoes for Men, White (White), 42 EU',
+                          old_price: '2800,00',
+                          new_price: '2429,00',
+                          sale: '24',
+                        ),
+                        grid_container_components(
+                          urlImage:
+                              'https://m.media-amazon.com/images/I/71eTPIjcR7L._AC_SY575_.jpg',
+                          product_text:
+                              'Asics Gel-Quantum 90 Road Running Shoes for Men, White (White), 42 EU',
+                          old_price: '2800,00',
+                          new_price: '2429,00',
+                          sale: '24',
+                        ),
+                        grid_container_components(
+                          urlImage:
+                              'https://m.media-amazon.com/images/I/71eTPIjcR7L._AC_SY575_.jpg',
+                          product_text:
+                              'Asics Gel-Quantum 90 Road Running Shoes for Men, White (White), 42 EU',
+                          old_price: '2800,00',
+                          new_price: '2429,00',
+                          sale: '24',
                         ),
                       ],
                     ),
-
-                      SizedBox(
-                      height: 2,
+                  ),
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: [
+                        grid_container_components(
+                          urlImage:
+                              'https://m.media-amazon.com/images/I/71eTPIjcR7L._AC_SY575_.jpg',
+                          product_text:
+                              'Asics Gel-Quantum 90 Road Running Shoes for Men, White (White), 42 EU',
+                          old_price: '2800,00',
+                          new_price: '2429,00',
+                          sale: '24',
+                        ),
+                        grid_container_components(
+                          urlImage:
+                              'https://m.media-amazon.com/images/I/71eTPIjcR7L._AC_SY575_.jpg',
+                          product_text:
+                              'Asics Gel-Quantum 90 Road Running Shoes for Men, White (White), 42 EU',
+                          old_price: '2800,00',
+                          new_price: '2429,00',
+                          sale: '24',
+                        ),
+                        grid_container_components(
+                          urlImage:
+                              'https://m.media-amazon.com/images/I/71eTPIjcR7L._AC_SY575_.jpg',
+                          product_text:
+                              'Asics Gel-Quantum 90 Road Running Shoes for Men, White (White), 42 EU',
+                          old_price: '2800,00',
+                          new_price: '2429,00',
+                          sale: '24',
+                        ),
+                        grid_container_components(
+                          urlImage:
+                              'https://m.media-amazon.com/images/I/71eTPIjcR7L._AC_SY575_.jpg',
+                          product_text:
+                              'Asics Gel-Quantum 90 Road Running Shoes for Men, White (White), 42 EU',
+                          old_price: '2800,00',
+                          new_price: '2429,00',
+                          sale: '24',
+                        ),
+                      ],
                     ),
-                      SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: Row(
-                        children: [
-                          grid_container_components(
-                            urlImage:
-                                'https://m.media-amazon.com/images/I/71eTPIjcR7L._AC_SY575_.jpg',
-                            product_text:
-                                'Asics Gel-Quantum 90 Road Running Shoes for Men, White (White), 42 EU',
-                            old_price: '2800,00',
-                            new_price: '2429,00',
-                            sale: '24',
-                          ),
-                          grid_container_components(
-                            urlImage:
-                                'https://m.media-amazon.com/images/I/71eTPIjcR7L._AC_SY575_.jpg',
-                            product_text:
-                                'Asics Gel-Quantum 90 Road Running Shoes for Men, White (White), 42 EU',
-                            old_price: '2800,00',
-                            new_price: '2429,00',
-                            sale: '24',
-                          ),
-                          grid_container_components(
-                            urlImage:
-                                'https://m.media-amazon.com/images/I/71eTPIjcR7L._AC_SY575_.jpg',
-                            product_text:
-                                'Asics Gel-Quantum 90 Road Running Shoes for Men, White (White), 42 EU',
-                            old_price: '2800,00',
-                            new_price: '2429,00',
-                            sale: '24',
-                          ),
-                          grid_container_components(
-                            urlImage:
-                                'https://m.media-amazon.com/images/I/71eTPIjcR7L._AC_SY575_.jpg',
-                            product_text:
-                                'Asics Gel-Quantum 90 Road Running Shoes for Men, White (White), 42 EU',
-                            old_price: '2800,00',
-                            new_price: '2429,00',
-                            sale: '24',
-                          ),
-                        ],
-                    ),
-                      ),
-                      SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: Row(
-                        children: [
-                          grid_container_components(
-                            urlImage:
-                                'https://m.media-amazon.com/images/I/71eTPIjcR7L._AC_SY575_.jpg',
-                            product_text:
-                                'Asics Gel-Quantum 90 Road Running Shoes for Men, White (White), 42 EU',
-                            old_price: '2800,00',
-                            new_price: '2429,00',
-                            sale: '24',
-                          ),
-                          grid_container_components(
-                            urlImage:
-                                'https://m.media-amazon.com/images/I/71eTPIjcR7L._AC_SY575_.jpg',
-                            product_text:
-                                'Asics Gel-Quantum 90 Road Running Shoes for Men, White (White), 42 EU',
-                            old_price: '2800,00',
-                            new_price: '2429,00',
-                            sale: '24',
-                          ),
-                          grid_container_components(
-                            urlImage:
-                                'https://m.media-amazon.com/images/I/71eTPIjcR7L._AC_SY575_.jpg',
-                            product_text:
-                                'Asics Gel-Quantum 90 Road Running Shoes for Men, White (White), 42 EU',
-                            old_price: '2800,00',
-                            new_price: '2429,00',
-                            sale: '24',
-                          ),
-                          grid_container_components(
-                            urlImage:
-                                'https://m.media-amazon.com/images/I/71eTPIjcR7L._AC_SY575_.jpg',
-                            product_text:
-                                'Asics Gel-Quantum 90 Road Running Shoes for Men, White (White), 42 EU',
-                            old_price: '2800,00',
-                            new_price: '2429,00',
-                            sale: '24',
-                          ),
-                        ],
-                    ),
-                      ),
+                  ),
                 ]))),
           ]),
         ),
@@ -385,7 +433,7 @@ class grid_container_components extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(left: 5),
       child: GestureDetector(
-        onTap: (){
+        onTap: () {
           print("Item Clicked");
         },
         child: Container(
@@ -405,12 +453,16 @@ class grid_container_components extends StatelessWidget {
                   product_text,
                   maxLines: 2,
                 ),
-                SizedBox(height: 20,),
+                SizedBox(
+                  height: 20,
+                ),
                 Text(
                   "\$new_price",
                   style: TextStyle(color: AppColors.cyanColor),
                 ),
-                SizedBox(height: 20,),
+                SizedBox(
+                  height: 20,
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
@@ -458,11 +510,14 @@ class card_components extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(6.0),
       child: GestureDetector(
-        onTap: (){
-        Navigator.of(context).push(MaterialPageRoute(builder: (context){return ItemScreen();}));
+        onTap: () {
+          Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+            return ItemScreen();
+          }));
         },
         child: Container(
-          decoration: BoxDecoration(borderRadius: BorderRadiusDirectional.circular(5)),
+          decoration:
+              BoxDecoration(borderRadius: BorderRadiusDirectional.circular(5)),
           width: 141,
           height: 238,
           child: Card(
@@ -481,12 +536,16 @@ class card_components extends StatelessWidget {
                     product_text,
                     maxLines: 2,
                   ),
-                  SizedBox(height: 20,),
+                  SizedBox(
+                    height: 20,
+                  ),
                   Text(
                     "\$${new_price}",
                     style: TextStyle(color: AppColors.cyanColor),
                   ),
-                  SizedBox(height: 20,),
+                  SizedBox(
+                    height: 20,
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
@@ -528,7 +587,9 @@ class circle_avatar_components extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){print("Category Clicked");},
+      onTap: () {
+        print("Category Clicked");
+      },
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -539,7 +600,7 @@ class circle_avatar_components extends StatelessWidget {
               backgroundColor: AppColors.whiteColor,
               radius: 35,
               child: Container(
-                  child: Image.asset(
+                  child: Image.network(
                 urlImage,
                 fit: BoxFit.cover,
               )),
