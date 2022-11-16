@@ -37,7 +37,7 @@ class MyApp extends StatelessWidget {
       onGenerateRoute: RouteGenerator.generateRoute,
       //darkTheme: ThemeData.dark(),
       debugShowCheckedModeBanner: false,
-      home: HomeScreen(),
+      home: SplashScreen(),
     );
   }
 }
