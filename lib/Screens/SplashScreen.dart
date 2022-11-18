@@ -17,6 +17,7 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     Future.delayed(Duration(milliseconds: 5000), () async {
       final prefs = await SharedPreferences.getInstance();
+
       final accesstoken = await prefs.get('user_access_token');
       if (accesstoken == null) {
         Navigator.of(context).pushAndRemoveUntil(
@@ -30,6 +31,7 @@ class _SplashScreenState extends State<SplashScreen> {
         }), (route) => false);
       }
     });
+
     return Scaffold(
       backgroundColor: Colors.amber,
       body: Center(
