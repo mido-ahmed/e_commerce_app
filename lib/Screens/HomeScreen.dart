@@ -1,3 +1,4 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:e_commerce_app/Repository/category_repo.dart';
 import 'package:e_commerce_app/Screens/ItemsScreen.dart';
 import 'package:e_commerce_app/model/category_repo_model.dart';
@@ -38,6 +39,24 @@ class _HomeScreenState extends State<HomeScreen> {
     'https://ae01.alicdn.com/kf/HTB19P5XKv5TBuNjSspmq6yDRVXaf/BomKinta-Hot-Light-Running-Shoes-White-Sneakers-Men-Gym-Sport-Shoes-Male-Breathable-chaussure-sport-homme.jpg',
     'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSg6Mi6Kk838PWnkSRww1EoqFZON88BVroGsUjMX65W2sd23YpPycx7ZqSTI5LQuMMf_o&usqp=CAU'
   ];
+  bool isInternetConnected = false;
+  @override
+  void initState() {
+    super.initState();
+    final subcription = Connectivity()
+        .onConnectivityChanged
+        .listen((ConnectivityResult result) {
+      if (result == ConnectivityResult.none) {
+        setState(() {
+          isInternetConnected = false;
+        });
+      } else {
+        setState(() {
+          isInternetConnected = true;
+        });
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
