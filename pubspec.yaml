@@ -35,7 +35,7 @@ dependencies:
   smooth_page_indicator: ^1.0.0+2
   icon: ^2.2.1
   icon_forest: ^1.1.8
-  material_design_icons_flutter: 5.0.6996
+  material_design_icons_flutter: ^6.0.7096
   keyboard_actions: "^3.4.7"
   tbib_splash_screen: ^0.0.6
   flutter_rating_bar: ^4.0.1
