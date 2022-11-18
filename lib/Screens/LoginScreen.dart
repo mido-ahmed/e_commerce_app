@@ -76,6 +76,7 @@ class LoginScreen extends StatelessWidget {
                     child: Column(
                       children: [
                         TextFormField(
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
                           textInputAction: TextInputAction.next,
                           minLines: 1,
                           validator: (value) {
@@ -101,6 +102,7 @@ class LoginScreen extends StatelessWidget {
                           height: 20,
                         ),
                         TextFormField(
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
                           textInputAction: TextInputAction.next,
                           validator: (value) {
                             if (value == null || value.isEmpty) {
