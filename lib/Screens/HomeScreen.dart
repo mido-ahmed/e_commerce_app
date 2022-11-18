@@ -60,6 +60,11 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    if (isInternetConnected == false) {
+      return Center(
+        child: Text("No Internet Connection"),
+      );
+    }
     Widget buildImage(String urlImage, int index) => Container(
           margin: EdgeInsets.symmetric(horizontal: 1),
           color: Colors.grey,
