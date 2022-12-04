@@ -1,6 +1,7 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:e_commerce_app/Repository/category_repo.dart';
 import 'package:e_commerce_app/Screens/ItemsScreen.dart';
+import 'package:e_commerce_app/Screens/category_product_screen.dart';
 import 'package:e_commerce_app/model/category_repo_model.dart';
 import 'package:e_commerce_app/themes/Colors.dart';
 import 'package:flutter/material.dart';
@@ -209,32 +210,30 @@ class _HomeScreenState extends State<HomeScreen> {
                             shrinkWrap: true,
                             scrollDirection: Axis.horizontal,
                             itemBuilder: (context, index) {
-                              return Container(
-                                height: 100,
-                                margin: EdgeInsets.symmetric(horizontal: 12),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    CircleAvatar(
-                                      backgroundColor: AppColors.cyanColor,
-                                      radius: 36,
-                                      child: CircleAvatar(
-                                        backgroundColor: AppColors.whiteColor,
+                              return GestureDetector(
+                                onTap: () {
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                      builder: (context) =>
+                                          CategoryProductScreen()));
+                                },
+                                child: Container(
+                                  height: 100,
+                                  margin: EdgeInsets.symmetric(horizontal: 12),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      CircleAvatar(
+                                        backgroundImage: NetworkImage(
+                                            ListOfCategories[index].image),
                                         radius: 35,
-                                        child: Container(
-                                            child: Image.network(
-                                          ListOfCategories[index].image,
-                                          height: 55,
-                                          width: 55,
-                                        )),
                                       ),
-                                    ),
-                                    Text(
-                                      ListOfCategories[index].name,
-                                      style:
-                                          TextStyle(color: Color(0xff9098B1)),
-                                    ),
-                                  ],
+                                      Text(
+                                        ListOfCategories[index].name,
+                                        style:
+                                            TextStyle(color: Color(0xff9098B1)),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               );
                             },
@@ -509,90 +508,6 @@ class grid_container_components extends StatelessWidget {
                   ],
                 ),
               ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class card_components extends StatelessWidget {
-  const card_components({
-    Key? key,
-    required this.urlImage,
-    required this.product_text,
-    required this.old_price,
-    required this.new_price,
-    required this.sale,
-  }) : super(key: key);
-
-  final String urlImage;
-  final String product_text;
-  final String old_price;
-  final String new_price;
-  final String sale;
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(6.0),
-      child: GestureDetector(
-        onTap: () {
-          Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-            return ItemScreen();
-          }));
-        },
-        child: Container(
-          decoration:
-              BoxDecoration(borderRadius: BorderRadiusDirectional.circular(5)),
-          width: 141,
-          height: 238,
-          child: Card(
-            child: Padding(
-              padding: const EdgeInsets.only(left: 5),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Image.network(
-                    urlImage,
-                    fit: BoxFit.cover,
-                    width: 105,
-                    height: 105,
-                  ),
-                  Text(
-                    product_text,
-                    maxLines: 2,
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Text(
-                    "\$${new_price}",
-                    style: TextStyle(color: AppColors.cyanColor),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Text(
-                        "\$${old_price}",
-                        style: TextStyle(
-                            decoration: TextDecoration.lineThrough,
-                            color: AppColors.grayColor),
-                      ),
-                      SizedBox(
-                        width: 14,
-                      ),
-                      Text(
-                        sale,
-                        style: TextStyle(color: Colors.red),
-                      )
-                    ],
-                  ),
-                ],
-              ),
             ),
           ),
         ),
