@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:e_commerce_app/model/category_products_model.dart';
 import 'package:e_commerce_app/model/category_repo_model.dart';
 import 'package:http/http.dart' as http;
 
@@ -18,5 +19,14 @@ class CategoryRepository {
     ); //kda d2e2 l 3gena
 
     return ListOfCategories;
+  }
+
+  Future<List<Product>> getProductsByCactegory(String categoryName) async {
+    final response =
+        await Dio().get('https://dummyjson.com/products/category/$categoryName');
+
+    final categoryProducts = CategoryProducts.fromJson(response.data);
+
+    return categoryProducts.products;
   }
 }
