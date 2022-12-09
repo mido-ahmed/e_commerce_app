@@ -11,11 +11,6 @@ import 'Screens/LoginScreen.dart';
 import 'Screens/SignInScreens.dart';
 import 'Screens/HomeScreen.dart';
 
-//youtube channels
-//flutter package+
-//boring show top takeaways
-//debugging flutter
-
 void main() {
   runApp(MyApp());
 }
@@ -42,9 +37,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-/*
-* Sql
-* 1-sqflite
-* 2-shared preference--> key : value
-* 3-Hive
-* */
