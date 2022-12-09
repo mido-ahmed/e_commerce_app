@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:e_commerce_app/model/category_products_model.dart';
 import 'package:e_commerce_app/model/category_repo_model.dart';
-import 'package:http/http.dart' as http;
 
 class CategoryRepository {
   Future<List<CategoryRepoModel>> getAllCategories() async {
