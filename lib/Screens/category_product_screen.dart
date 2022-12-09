@@ -89,7 +89,6 @@ class CategoryProductScreen extends StatelessWidget {
                 );
               }
             }
-
             return Text('Try Again Later!');
           }),
     );
