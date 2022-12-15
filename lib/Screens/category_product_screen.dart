@@ -9,7 +9,8 @@ import '../model/category_products_model.dart';
 class CategoryProductScreen extends StatefulWidget {
   final String categoryName;
   final int productid;
-  CategoryProductScreen({Key? key, required this.categoryName, required this.productid})
+  CategoryProductScreen(
+      {Key? key, required this.categoryName, required this.productid})
       : super(key: key);
 
   @override
@@ -60,8 +61,9 @@ class _CategoryProductScreenState extends State<CategoryProductScreen> {
                   itemCount: listOfProducts.length,
                   itemBuilder: (BuildContext context, int index) {
                     return InkWell(
-                      onTap: (){
-                        Navigator.of(context).push(MaterialPageRoute(builder:(context) => SingleProductScreen()));
+                      onTap: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => SingleProductScreen()));
                       },
                       child: Container(
                         padding: EdgeInsets.all(8),
