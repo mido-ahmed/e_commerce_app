@@ -1,4 +1,5 @@
 import 'package:e_commerce_app/Screens/AccountScreen.dart';
+import 'package:e_commerce_app/Screens/CartScreen.dart';
 import 'package:e_commerce_app/Screens/ExploreScreen.dart';
 import 'package:e_commerce_app/Screens/ItemsScreen.dart';
 import 'package:e_commerce_app/Screens/OfferScreen.dart';
@@ -7,6 +8,7 @@ import 'package:e_commerce_app/Screens/category_product_screen.dart';
 import 'package:e_commerce_app/Screens/flashsaleScreen.dart';
 import 'package:e_commerce_app/Screens/route_generator.dart';
 import 'package:e_commerce_app/Screens/single_product_screen.dart';
+import 'package:e_commerce_app/cubit/cart_cubit/cart_cubit.dart';
 import 'package:e_commerce_app/cubit/product_cubit/product_cubit.dart';
 import 'package:flutter/material.dart';
 import 'Screens/LoginScreen.dart';
@@ -22,7 +24,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      providers: [BlocProvider(create: (context) => ProductCubit())],
+      providers: [
+        BlocProvider(create: (context) => ProductCubit()),
+        BlocProvider(create: (context) => CartCubit())
+      ],
       child: MaterialApp(
         initialRoute: '/',
         routes: {
@@ -39,7 +44,7 @@ class MyApp extends StatelessWidget {
         onGenerateRoute: RouteGenerator.generateRoute,
         //darkTheme: ThemeData.dark(),
         debugShowCheckedModeBanner: false,
-        home: HomeScreen(),
+        home: CartScreen(),
       ),
     );
   }
