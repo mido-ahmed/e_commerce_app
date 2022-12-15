@@ -13,7 +13,6 @@ class CartScreen extends StatefulWidget {
 
 class _CartScreenState extends State<CartScreen> {
   void initState() {
-    // TODO: implement initState
     super.initState();
     context.read<CartCubit>();
   }
