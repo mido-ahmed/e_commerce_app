@@ -1,4 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:e_commerce_app/Screens/CartScreen.dart';
 import 'package:e_commerce_app/Screens/HomeScreen.dart';
 import 'package:e_commerce_app/themes/Colors.dart';
 import 'package:flutter/material.dart';
@@ -442,7 +443,11 @@ class _ItemScreenState extends State<ItemScreen> {
                     width: 343,
                     height: 57,
                     child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context ){
+                            return CartScreen(idproduct: 1);
+                          }));
+                        },
                         child: Text(
                           "Add To Cart",
                           style: TextStyle(
