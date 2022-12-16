@@ -7,8 +7,8 @@ part 'cart_state.dart';
 
 class CartCubit extends Cubit<CartState> {
   CartCubit() : super(CartInitial());
-  void getCart()async{
-    final cart= await CartRepository().getCart();
+  void getCart() async {
+    final cart = await CartRepository().getCart();
     emit(CartSuccess(cart));
   }
 }

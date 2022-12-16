@@ -1,11 +1,11 @@
 import 'package:e_commerce_app/cubit/cart_cubit/cart_cubit.dart';
 import 'package:e_commerce_app/themes/Colors.dart';
-import 'package:e_commerce_app/widgets/global_scaffold_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CartScreen extends StatefulWidget {
-  const CartScreen({Key? key}) : super(key: key);
+  final int idproduct;
+  const CartScreen({Key? key,  required this.idproduct}) : super(key: key);
 
   @override
   State<CartScreen> createState() => _CartScreenState();
@@ -20,9 +20,16 @@ class _CartScreenState extends State<CartScreen> {
   int indicator = 0;
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<CartCubit, CartState>(builder: (context, state) {
-      if (state is CartSuccess) {
-        return ListView(
+    return Scaffold(
+      body: BlocBuilder<CartCubit, CartState>(builder: (context, state) {
+        if (state is CartLoading) {
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+        if (state is CartSuccess) {
+          final cart = state.list;
+          return ListView(
             children: [
               Padding(
                 padding: const EdgeInsets.only(left: 16, top: 40),
@@ -42,20 +49,22 @@ class _CartScreenState extends State<CartScreen> {
                   borderRadius: BorderRadiusDirectional.circular(20),
                 ),
                 width: 343,
-                height: 104,
+                height: 114,
                 child: Row(
                   children: [
                     SizedBox(
-                      width: 8,
+                      width: 11,
                     ),
                     Image.network(
-                        'https://eg.jumia.is/unsafe/fit-in/680x680/filters:fill(white)/product/91/556942/1.jpg?2128'),
+                        'https://eg.jumia.is/unsafe/fit-in/680x680/filters:fill(white)/product/91/556942/1.jpg?2128',
+                        width: 90),
                     Column(
                       children: [
                         Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              "Nike Air Zoom Pegasus 36 Miami",
+                              "${cart[widget.idproduct].title}",
                               style: TextStyle(
                                 color: AppColors.blackColor,
                                 fontSize: 12,
@@ -76,7 +85,10 @@ class _CartScreenState extends State<CartScreen> {
                         ),
                         Row(
                           children: [
-                            Text("\$299,43"),
+                            Text(
+                              "\$${cart[widget.idproduct].price}",
+                              style: TextStyle(color: Colors.cyan),
+                            ),
                             SizedBox(
                               width: 30,
                             ),
@@ -85,7 +97,7 @@ class _CartScreenState extends State<CartScreen> {
                                 ElevatedButton(
                                     onPressed: () {
                                       setState(() {
-                                        indicator--;
+                                        cart[widget.idproduct].quantity--;
                                       });
                                     },
                                     style: ButtonStyle(
@@ -97,14 +109,14 @@ class _CartScreenState extends State<CartScreen> {
                                       style:
                                           TextStyle(color: AppColors.grayColor),
                                     )),
-                                Text("$indicator"),
+                                Text("${cart[widget.idproduct].quantity}"),
                                 ElevatedButton(
                                     style: ButtonStyle(
                                         backgroundColor:
                                             MaterialStateProperty.all(
                                                 Colors.white)),
                                     onPressed: () {
-                                      indicator++;
+                                      cart[widget.idproduct].quantity++;
                                     },
                                     child: Text(
                                       "+",
@@ -129,20 +141,22 @@ class _CartScreenState extends State<CartScreen> {
                   borderRadius: BorderRadiusDirectional.circular(20),
                 ),
                 width: 343,
-                height: 104,
+                height: 114,
                 child: Row(
                   children: [
                     SizedBox(
                       width: 8,
                     ),
                     Image.network(
-                        'https://eg.jumia.is/unsafe/fit-in/680x680/filters:fill(white)/product/91/556942/1.jpg?2128'),
+                        'https://eg.jumia.is/unsafe/fit-in/680x680/filters:fill(white)/product/91/556942/1.jpg?2128',
+                        width: 90),
                     Column(
                       children: [
                         Row(
                           children: [
                             Text(
-                              "Nike Air Zoom Pegasus 36 Miami",
+                              "${cart[widget.idproduct].title}",
+                              maxLines: 1,
                               style: TextStyle(
                                 color: AppColors.blackColor,
                                 fontSize: 12,
@@ -163,7 +177,10 @@ class _CartScreenState extends State<CartScreen> {
                         ),
                         Row(
                           children: [
-                            Text("\$299,43"),
+                            Text(
+                              "\$${cart[widget.idproduct].price}",
+                              style: TextStyle(color: Colors.cyan),
+                            ),
                             SizedBox(
                               width: 30,
                             ),
@@ -184,7 +201,7 @@ class _CartScreenState extends State<CartScreen> {
                                       style:
                                           TextStyle(color: AppColors.grayColor),
                                     )),
-                                Text("$indicator"),
+                                Text("${cart[widget.idproduct].quantity}"),
                                 ElevatedButton(
                                     style: ButtonStyle(
                                         backgroundColor:
@@ -269,7 +286,7 @@ class _CartScreenState extends State<CartScreen> {
                       children: [
                         Text("total price"),
                         Text(
-                          "\$766,86",
+                          "${cart[widget.idproduct].total}",
                           style: TextStyle(color: Colors.cyan),
                         ),
                       ],
@@ -286,14 +303,15 @@ class _CartScreenState extends State<CartScreen> {
                   child: ElevatedButton(
                       onPressed: () {}, child: Text("Check Out"))),
             ],
-        );
-      }
-      return Scaffold(
-          body: Center(
-              child: SizedBox(
-        height: 20,
-        child: Text("hello"),
-      )));
-    });
+          );
+        }
+        return Scaffold(
+            body: Center(
+                child: SizedBox(
+          height: 20,
+          child: Text("hello"),
+        )));
+      }),
+    );
   }
 }

@@ -17,7 +17,7 @@ class _NavigationState extends State<Navigation> {
   final Screens = [
     HomeScreen(),
     ExploreScreen(),
-    CartScreen(),
+    CartScreen(idproduct: 0),
     OfferScreen(),
     AccountScreen()
   ];

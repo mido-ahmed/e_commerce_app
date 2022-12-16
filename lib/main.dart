@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => ProductCubit()),
-        BlocProvider(create: (context) => CartCubit())
+        BlocProvider(create: (context) => CartCubit()..getCart())
       ],
       child: MaterialApp(
         initialRoute: '/',
@@ -44,7 +44,7 @@ class MyApp extends StatelessWidget {
         onGenerateRoute: RouteGenerator.generateRoute,
         //darkTheme: ThemeData.dark(),
         debugShowCheckedModeBanner: false,
-        home: CartScreen(),
+        home: HomeScreen(),
       ),
     );
   }

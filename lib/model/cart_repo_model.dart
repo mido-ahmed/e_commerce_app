@@ -52,7 +52,7 @@ class CartRepoModel {
   final int id;
   final String title;
   final int price;
-  final int quantity;
+  late final int quantity;
   final int total;
   final double discountPercentage;
   final int discountedPrice;
