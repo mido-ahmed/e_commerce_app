@@ -5,6 +5,8 @@ import 'package:e_commerce_app/Screens/ItemsScreen.dart';
 import 'package:e_commerce_app/Screens/OfferScreen.dart';
 import 'package:e_commerce_app/Screens/SplashScreen.dart';
 import 'package:e_commerce_app/Screens/category_product_screen.dart';
+import 'package:e_commerce_app/Screens/charactersScreen.dart';
+import 'package:e_commerce_app/Screens/characters_info_screen.dart';
 import 'package:e_commerce_app/Screens/flashsaleScreen.dart';
 import 'package:e_commerce_app/Screens/route_generator.dart';
 import 'package:e_commerce_app/Screens/single_product_screen.dart';
@@ -44,7 +46,7 @@ class MyApp extends StatelessWidget {
         onGenerateRoute: RouteGenerator.generateRoute,
         //darkTheme: ThemeData.dark(),
         debugShowCheckedModeBanner: false,
-        home: HomeScreen(),
+        home: CharacterScreen(),
       ),
     );
   }
