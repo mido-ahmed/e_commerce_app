@@ -36,58 +36,64 @@ class _CharacterScreenState extends State<CharacterScreen> {
         centerTitle: true,
         backgroundColor: Colors.deepOrange,
       ),
-      body: GridView.builder(
-        itemCount: charactersImages.length,
-        physics: ScrollPhysics(),
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            mainAxisExtent: 210,
-            crossAxisCount: 2,
-            mainAxisSpacing: 20,
-            crossAxisSpacing: 16,
-            childAspectRatio: 0.9),
-        shrinkWrap: true,
-        itemBuilder: (BuildContext context, int index) {
-          return SafeArea(
-            child: Container(
-              width: 100,
-              height: 160,
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color: Colors.orangeAccent,
-                  width: 2,
-                ),
-                borderRadius: BorderRadiusDirectional.circular(10),
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Image.network(
-                    charactersImages[0],
-                    width: 120,
-                    height: 140,
+      body: InkWell(
+        onTap: () {
+          print("clicked");
+        },
+        child: GridView.builder(
+          itemCount: charactersImages.length,
+          physics: ScrollPhysics(),
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              mainAxisExtent: 210,
+              crossAxisCount: 2,
+              mainAxisSpacing: 20,
+              crossAxisSpacing: 16,
+              childAspectRatio: 0.9),
+          shrinkWrap: true,
+          itemBuilder: (BuildContext context, int index) {
+            return SafeArea(
+              child: Container(
+                width: 100,
+                height: 160,
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    color: Colors.orangeAccent,
+                    width: 2,
                   ),
-                  Container(
-                    width: 155,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => CharactersInfoScreen(),
-                        ));
-                      },
-                      child: Text(charactersNames[0]),
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.deepOrange,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12), // <-- Radius
+                  borderRadius: BorderRadiusDirectional.circular(10),
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Image.network(
+                      charactersImages[0],
+                      width: 120,
+                      height: 140,
+                    ),
+                    Container(
+                      width: 155,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => CharactersInfoScreen(),
+                          ));
+                        },
+                        child: Text(charactersNames[0]),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.deepOrange,
+                          shape: RoundedRectangleBorder(
+                            borderRadius:
+                                BorderRadius.circular(12), // <-- Radius
+                          ),
                         ),
                       ),
-                    ),
-                  )
-                ],
+                    )
+                  ],
+                ),
               ),
-            ),
-          );
-        },
+            );
+          },
+        ),
       ),
     );
   }
